@@ -157,6 +157,7 @@ python scripts/prepare_char_masks.py \
 [TODO] scripts
 
 Example of generating images with stackmix
+
 ![Example of generating images](https://sun9-64.userapi.com/impg/xAFmDnVuuTmc4FM_FKhLPnq-KvrppD4x-DvUKg/hy1qKbRbS58.jpg?size=402x305&quality=96&sign=5bdfa7702f2e655cc991e274d4bb7b3f&type=album)
 
 ## Supported by:
