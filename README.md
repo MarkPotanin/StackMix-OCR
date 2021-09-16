@@ -3,26 +3,6 @@
 [This paper](https://arxiv.org/abs/2108.11667) presents a new text generation method StackMix. StackMix can be 
 applied to the standalone task of generating handwritten text based on printed text.
 
-## Table with results
-
-[TODO] 
-
-## Demo Neptune with all experiments
-
-[TODO]
-
-## Pretrained Models
-
-[TODO] 
-
-## Recommended structure of experiments:
-
-```
---- StackMix-OCR/
---- StackMix-OCR-DATA/
---- StackMix-OCR-SAVED_MODELS/
---- StackMix-OCR-MWE_TOKENS/
-```
 ## Config file
 Create a new config file need  in ```configs/init.py```. 
 An individual config file is required for each dataset
@@ -44,7 +24,7 @@ All dataset names: bentham, peter, hkr, iam.
 
 ### Dataset format
 
-The dataset should contain a directory with images, a csv file and a json file with markup information. An example of the file location can be seen below
+The dataset should contain a directory with images, a csv file `marking.csv` and a json file with markup information. An example of the file location can be seen below
 
 ![Dataset format](https://sun9-7.userapi.com/impg/GpIzvjYF9AbpGOQbamvCcgwRA9fVfHo2SaPOcg/Ox847-h0m8o.jpg?size=174x106&quality=96&sign=fb2ce9af30b54f09cfc8542ee8f84fad&type=album)
 
@@ -58,52 +38,11 @@ sample_id,path,stage,text
 270-05,washington/images/270-05.png,train,"down a Barrel of Flints with the Arms, to"
 ```
 
-#### How to get char masks:
-```
-python scripts/prepare_char_masks.py \
---checkpoint_path "exp/hkr_base_no_aug/last.pt" \
---dataset_name "peter" \
---image_w 1024 \
---image_h 128 \
---bs 12 \
---num_workers 3 \
---experiment_name "sdfsdf" \
---data_dir "data/"
-```
-
-## Run in docker:
-
-[TODO] 
-
-## Run locally:
+## Run:
 
 install requirements:
 ```
 pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
-```
-
-### Run experiments from root project (StackMix-OCR):
-
-1. Train "base" experiment:
-```
-sh runners/bentham/train.sh
-```
-
-2. Train "base + blots" experiment:
-```
-sh runners/bentham/train_blots.sh
-```
-
-3. Train "base + stackmix" experiment:
-```
-sh runners/bentham/prepare_stackmix.sh
-sh runners/bentham/train_stackmix.sh
-```
-
-4. Train "base + blots + stackmix" experiment:
-```
-sh runners/bentham/prepare_stackmix.sh
-sh runners/bentham/train_blots_stackmix.sh
 ```
 
 ## Example run train:
@@ -139,7 +78,7 @@ python scripts/run_evaluation.py \
 --seed 6955
 ```
 
-## Generating char_mask for stackmix
+## Generating char_mask for stackmix:
 ```
 python scripts/prepare_char_masks.py \
 --checkpoint_path "exp/hkr_base_no_aug/last.pt" \
@@ -152,13 +91,16 @@ python scripts/prepare_char_masks.py \
 --data_dir "data/"
 ```
 
-## Generating images with stackmix
+### Note
 
-[TODO] scripts
+ - `dataset_name` must be taken from the config
+ - all file paths must be relative
 
 Example of generating images with stackmix
 
 ![Example of generating images](https://sun9-64.userapi.com/impg/xAFmDnVuuTmc4FM_FKhLPnq-KvrppD4x-DvUKg/hy1qKbRbS58.jpg?size=402x305&quality=96&sign=5bdfa7702f2e655cc991e274d4bb7b3f&type=album)
+
+The code for generation can be found [here](/jupyters/usage_stackmix.ipynb)
 
 ## Supported by:
 
