@@ -4,7 +4,7 @@
 applied to the standalone task of generating handwritten text based on printed text.
 
 ## Config file
-Create a new config file need  in ```configs/init.py```. 
+Create a new config file need  in ```configs/__init__.py```. 
 An individual config file is required for each dataset
 
 ## Datasets
@@ -49,45 +49,45 @@ pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable
 ```
 python scripts/run_train.py \
 --checkpoint_path "" \
---experiment_name "HKR_base_aug" \
+--experiment_name "hkr_base_aug" \
 --dataset_name "hkr" \
 --data_dir "data/" \
 --output_dir "exp/" \
 --experiment_description \
 "[Base] Training Base OCR on HKR dataset" \
---image_w 256 \
---image_h 32 \
+--image_w 1024 \
+--image_h 128 \
 --num_epochs 300 \
---bs 64 \
---num_workers 6 \
+--bs 16 \
+--num_workers 3 \
 --use_blot 0 \
 --use_augs 1 \
 --use_progress_bar 0 \
---seed 6955
+--seed 100
 ```
 
 ## Example run evaluation:
 ```
 python scripts/run_evaluation.py \
 --experiment_folder "exp/htr_dataset_aug" \
---dataset_name "htr_dataset" \
+--dataset_name "htr" \
 --data_dir "data/" \
 --image_w 1024 \
 --image_h 128 \
---bs 64 \
---seed 6955
+--bs 16 \
+--seed 100
 ```
 
 ## Generating char_mask for stackmix:
 ```
 python scripts/prepare_char_masks.py \
 --checkpoint_path "exp/hkr_base_no_aug/last.pt" \
---dataset_name "peter" \
+--dataset_name "htr" \
 --image_w 1024 \
 --image_h 128 \
---bs 12 \
+--bs 16 \
 --num_workers 3 \
---experiment_name "sdfsdf" \
+--experiment_name "htr_masks" \
 --data_dir "data/"
 ```
 
